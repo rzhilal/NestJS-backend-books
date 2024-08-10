@@ -41,6 +41,7 @@ CREATE TABLE `books` (
 --
 
 CREATE TABLE `borrowed_books` (
+  `code` varchar(36) NOT NULL,
   `book_code` varchar(10) NOT NULL,
   `member_code` varchar(10) NOT NULL,
   `borrow_date` date NOT NULL,
@@ -87,7 +88,8 @@ ALTER TABLE `books`
 -- Indexes for table `borrowed_books`
 --
 ALTER TABLE `borrowed_books`
-  ADD PRIMARY KEY (`book_code`,`member_code`,`borrow_date`),
+  ADD PRIMARY KEY (`code`),
+  ADD KEY `book_code` (`book_code`),
   ADD KEY `member_code` (`member_code`);
 
 --
@@ -119,8 +121,7 @@ ALTER TABLE `borrowed_books`
 -- Constraints for table `penalties`
 --
 ALTER TABLE `penalties`
-  ADD CONSTRAINT `penalties_ibfk_1` FOREIGN KEY (`member_code`) REFERENCES `members` (`code`),
-  ADD CONSTRAINT `penalties_ibfk_2` FOREIGN KEY (`code`) REFERENCES `books` (`code`);
+  ADD CONSTRAINT `penalties_ibfk_1` FOREIGN KEY (`member_code`) REFERENCES `members` (`code`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

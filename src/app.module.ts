@@ -1,10 +1,21 @@
+// src/app.module.ts
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { SequelizeModule } from '@nestjs/sequelize';
+import { MembersModule } from './members/members.module';
+import { databaseConfig } from './config/database.config';
+import { BooksModule } from './books/books.module';
+import { BorrowsModule } from './borrow/borrowed-books.modules';
+import { PenaltiesModule } from './penalties/penalties.modules';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    SequelizeModule.forRoot(databaseConfig),
+    MembersModule,
+    BooksModule,
+    BorrowsModule,
+    PenaltiesModule,
+  ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
