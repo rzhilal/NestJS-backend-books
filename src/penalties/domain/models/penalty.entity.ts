@@ -1,5 +1,5 @@
 import { Table, Column, Model, PrimaryKey, ForeignKey, DataType, Default } from 'sequelize-typescript';
-import { Member } from 'src/members/domain/models/member.entity';
+import { Member } from '../../../members/domain/models/member.entity';
 import { v4 as uuidv4 } from 'uuid';
 
 @Table({ tableName: 'penalties', timestamps: false })

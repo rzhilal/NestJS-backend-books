@@ -1,7 +1,7 @@
 import { Injectable, Inject, NotFoundException, InternalServerErrorException, forwardRef } from '@nestjs/common';
 import { Member } from '../domain/models/member.entity';
 import { CreateMemberDto } from '../dto/create-member.dto';
-import { BorrowService } from 'src/borrow/application/borrowed-book.service';
+import { BorrowService } from '../../borrow/application/borrowed-book.service';
 
 @Injectable()
 export class MemberService {

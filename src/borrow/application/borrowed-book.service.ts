@@ -9,10 +9,10 @@ import {
 } from '@nestjs/common';
 import { BorrowedBook } from '../domain/models/borrowed-book.entity';
 import { BorrowDto } from '../dto/borrow.dto';
-import { MemberService } from 'src/members/application/members.service';
-import { BookService } from 'src/books/application/books.service';
+import { MemberService } from '../../members/application/members.service';
+import { BookService } from '../../books/application/books.service';
 import { ReturnDto } from '../dto/return.dto';
-import { PenaltiesService } from 'src/penalties/application/penalties.service';
+import { PenaltiesService } from '../../penalties/application/penalties.service';
 
 @Injectable()
 export class BorrowService {
@@ -43,7 +43,7 @@ export class BorrowService {
     }
 
     const activeBorrows = await this.getActiveBorrowsForMember(memberCode);
-    if (activeBorrows.length >= 2) {
+    if (activeBorrows && activeBorrows.length >= 2) {
       throw new ConflictException('Member has reached the maximum borrowing limit');
     }
 
@@ -89,6 +89,9 @@ export class BorrowService {
 
   async countBorrowedBookMember(memberCode: string): Promise<number> {
     const activeBorrows = await this.getActiveBorrowsForMember(memberCode);
+    if (!activeBorrows) {
+      return 0;
+    }
     return activeBorrows.length;
   }
 

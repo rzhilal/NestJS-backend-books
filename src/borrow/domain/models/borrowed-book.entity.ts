@@ -1,6 +1,6 @@
 import { Table, Column, Model, PrimaryKey, ForeignKey, DataType, Default } from 'sequelize-typescript';
-import { Book } from 'src/books/domain/models/book.entity';
-import { Member } from 'src/members/domain/models/member.entity';
+import { Book } from '../../../books/domain/models/book.entity';
+import { Member } from '../../../members/domain/models/member.entity';
 import { v4 as uuidv4 } from 'uuid';
 
 @Table({ tableName: 'borrowed_books', timestamps: false })

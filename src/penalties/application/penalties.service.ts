@@ -42,7 +42,6 @@ export class PenaltiesService {
         });
         return penalty;
     } catch (error) {
-        console.error('Error creating penalty:', error);
         throw new InternalServerErrorException('Failed to add penalty');
     }
   }

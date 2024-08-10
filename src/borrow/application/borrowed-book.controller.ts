@@ -4,7 +4,7 @@ import { BorrowDto } from '../dto/borrow.dto';
 import { ApiTags, ApiResponse, ApiOperation } from '@nestjs/swagger';
 import { BorrowedBook } from '../domain/models/borrowed-book.entity';
 import { ReturnDto } from '../dto/return.dto';
-import { Member } from 'src/members/domain/models/member.entity';
+import { Member } from '../../members/domain/models/member.entity';
 
 @ApiTags('Borrows')
 @Controller('borrow')

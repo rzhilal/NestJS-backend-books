@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, NotFoundException } from '@nestjs/common';
 import { MemberService } from './members.service';
 import { CreateMemberDto } from '../dto/create-member.dto';
 import { ApiTags, ApiResponse, ApiOperation } from '@nestjs/swagger';
@@ -25,8 +25,12 @@ export class MemberController {
   @ApiOperation({ summary: 'Get member by code' })
   @ApiResponse({ status: 200, description: 'Member found.', type: Member })
   @ApiResponse({ status: 404, description: 'Member not found.' })
-  async getMemberByCode(@Param('code') code: string): Promise<Member | null> {
-    return this.memberService.findMemberByCode(code);
+  async getMemberByCode(@Param('code') code: string): Promise<Member> {
+    const member = await this.memberService.findMemberByCode(code);
+    if (!member) {
+      throw new NotFoundException('Member with the given code not found');
+    }
+    return member;
   }
 
   @Get()
